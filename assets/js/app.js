@@ -211,7 +211,7 @@ if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register('/sw.js')
                                 .then(res => {
                                     console.log("ServiceWorker Registrado");
-                                    registration.scope;
+                                    res.scope;
                                 })
                                 .catch(err => {
                                     console.error("Error al registrar el ServiceWorker: ", err);
