@@ -205,3 +205,16 @@ nst informacion = '<span>Expediente: '+dato.expediente+'</span><br>' +
                             '<span>Comentarios:</span><br>' +
                             '<p>'+dato.comentario+'</p>';
                             */
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", f => {
+        navigator.serviceWorker.register('/sw.js')
+                                .then(res => {
+                                    console.log("ServiceWorker Registrado");
+                                    registration.scope;
+                                })
+                                .catch(err => {
+                                    console.error("Error al registrar el ServiceWorker: ", err);
+                                });
+    });
+}
