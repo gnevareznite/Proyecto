@@ -75,7 +75,8 @@ function mostrar(expediente) {
                                 '<div class="row"><div class="col-4">Correo:</div><div class="col"> '+dato.email+'</div></div>' +
                                 '<div class="row"><div class="col-4">SIPE: </div><div class="col">'+dato.sipe+'</div></div>' +
                                 '<div class="row"><div class="col-4">Comentarios:</div><div class="col"></div></div>' +
-                                '<p>'+dato.comentario+'</p>';
+                                '<p>'+dato.comentario+'</p>' + 
+                                '<div class="row"><div class="col-12"><a href="#" class="btn btn-block btn-danger" onclick="borrarExpediente(\'' + expediente + '\', \'' + dato.expediente + '\')">Borrar</a></div>';
             
             $('#informacion').html(informacion);
         }
@@ -108,6 +109,19 @@ async function obtenerExpediente(id) {
     });
 
     return expediente;
+}
+
+function borrarExpediente(id, expediente) {
+    if (confirm('¿Realmente deseas borrar el expediente ' + expediente + '?')) {
+        defaultFirestore.collection('expedientes').doc(id).delete().then(res => {
+            console.log("Expediente eliminado");
+            cargarBD();
+            $('#informacion').html('');
+        })
+        .error(err => {
+            console.log("Error al borrar expedinte: ", err);
+        });
+    }
 }
 
 function validarFormulario() {
